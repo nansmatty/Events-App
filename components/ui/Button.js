@@ -3,11 +3,21 @@ import styles from "./button.module.css";
 
 const Button = (props) => {
 	return (
-		<Link
-			className={styles.btn}
-			href={props.link}>
-			{props.children}
-		</Link>
+		<>
+			{props.link ? (
+				<Link
+					className={styles.btn}
+					href={props.link}>
+					{props.children}
+				</Link>
+			) : (
+				<button
+					className={styles.btn}
+					onClick={props.onClick}>
+					{props.children}
+				</button>
+			)}
+		</>
 	);
 };
 
