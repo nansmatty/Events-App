@@ -1,17 +1,13 @@
-import { useRouter } from "next/router";
 import EventContent from "../../components/event-detail/event-content";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventSummary from "../../components/event-detail/event-summary";
 import ErrorAlert from "../../components/ui/error-alert";
-import { getEventById } from "../../dummy_data";
+import {
+	getAllEvents,
+	getEventById,
+} from "../../helpers/api-utils";
 
-const EventDetailPage = () => {
-	const router = useRouter();
-
-	const eventId = router.query.eventId;
-
-	const event = getEventById(eventId);
-
+const EventDetailPage = ({ event }) => {
 	if (!event) {
 		return (
 			<>
@@ -37,5 +33,32 @@ const EventDetailPage = () => {
 		</>
 	);
 };
+
+// Increament Site Regeneration
+
+export async function getStaticProps(context) {
+	const eventId = context.params.eventId;
+	const event = await getEventById(eventId);
+
+	return {
+		props: {
+			event: event,
+		},
+		revalidate: 30,
+	};
+}
+
+export async function getStaticPaths() {
+	const events = await getAllEvents();
+
+	const paths = events.map((event) => ({
+		params: { eventId: event.id },
+	}));
+
+	return {
+		paths: paths,
+		fallback: "blocking",
+	};
+}
 
 export default EventDetailPage;
