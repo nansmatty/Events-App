@@ -2,10 +2,16 @@ import EventContent from "../../components/event-detail/event-content";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventSummary from "../../components/event-detail/event-summary";
 import ErrorAlert from "../../components/ui/error-alert";
+// import {
+// 	getAllEvents,
+// 	getEventById,
+// 	getFeaturedEvents,
+// } from "../../helpers/api-utils";
+
 import {
-	getAllEvents,
 	getEventById,
-} from "../../helpers/api-utils";
+	getFeaturedEvents,
+} from "../../dummy_data";
 
 const EventDetailPage = ({ event }) => {
 	if (!event) {
@@ -49,7 +55,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-	const events = await getAllEvents();
+	const events = await getFeaturedEvents();
 
 	const paths = events.map((event) => ({
 		params: { eventId: event.id },

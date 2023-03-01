@@ -1,8 +1,11 @@
 export async function getAllEvents() {
-	const response = await fetch(
-		"https://nextjs-learning-project-default-rtdb.firebaseio.com/events.json"
-	);
+	// const response = await fetch(
+	// 	"https://nextjs-learning-project-default-rtdb.firebaseio.com/events.json"
+	// );
 
+	const response = await fetch(
+		"https://nextjs-learning-project-2023-default-rtdb.firebaseio.com/events.json"
+	);
 	const data = await response.json();
 
 	const events = [];
@@ -13,6 +16,8 @@ export async function getAllEvents() {
 			...data[key],
 		});
 	}
+
+	console.log(events);
 
 	return events;
 }
