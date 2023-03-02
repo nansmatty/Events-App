@@ -2,16 +2,16 @@ import EventContent from "../../components/event-detail/event-content";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventSummary from "../../components/event-detail/event-summary";
 import ErrorAlert from "../../components/ui/error-alert";
-// import {
-// 	getAllEvents,
-// 	getEventById,
-// 	getFeaturedEvents,
-// } from "../../helpers/api-utils";
-
 import {
+	getAllEvents,
 	getEventById,
 	getFeaturedEvents,
-} from "../../dummy_data";
+} from "../../helpers/api-utils";
+
+// import {
+// 	getEventById,
+// 	getFeaturedEvents,
+// } from "../../dummy_data";
 
 const EventDetailPage = ({ event }) => {
 	if (!event) {
